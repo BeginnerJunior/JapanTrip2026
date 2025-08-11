@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japan Trip 2026 - Presentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans Thai', sans-serif;
+            background-color: #E9EEF5; /* A light grey-blue background */
+        }
+        .slide-container {
+            aspect-ratio: 16 / 9;
+        }
+        .nav-btn {
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .nav-btn:disabled {
+            background-color: #D1D5DB;
+            color: #9CA3AF;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen p-4">
+
+    <div class="w-full max-w-4xl">
+        <!-- Slide Display Area -->
+        <div id="slide-display" class="slide-container bg-white rounded-lg shadow-2xl p-8 md:p-12 flex flex-col justify-center items-center text-center transition-opacity duration-500 ease-in-out">
+            <!-- Slide content will be injected here -->
+        </div>
+
+        <!-- Navigation Controls -->
+        <div class="flex items-center justify-between mt-4">
+            <button id="prev-btn" class="nav-btn bg-[#007FFF] text-white font-bold py-2 px-6 rounded-lg shadow-md hover:bg-[#0062D5]">
+                ก่อนหน้า
+            </button>
+            <div id="slide-counter" class="text-lg font-semibold text-gray-700"></div>
+            <button id="next-btn" class="nav-btn bg-[#007FFF] text-white font-bold py-2 px-6 rounded-lg shadow-md hover:bg-[#0062D5]">
+                ถัดไป
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const slides = [
+            {
+                type: 'title',
+                title: 'Japan Winter Trip 2026',
+                subtitle: 'ตะลุยหิมะ ชมฟูจิ เที่ยวโตเกียว',
+                text: '17 - 23 มกราคม 2026'
+            },
+            {
+                type: 'list',
+                title: 'ภาพรวมการเดินทาง (Trip Overview)',
+                items: [
+                    '<strong>7 วัน 6 คืน:</strong> เที่ยวครบทุกรสชาติ',
+                    '<strong>ไฮไลท์:</strong> ❄️ Gala Yuzawa, 🗻 Kawaguchiko, ⛩️ Kamakura, 🗼 Tokyo',
+                    '<strong>ที่พักหลัก:</strong> Nippori, Tokyo & Kawaguchiko'
+                ]
+            },
+            {
+                type: 'list',
+                title: 'Day 1: Arrival in Tokyo',
+                subtitle: 'วันเสาร์ที่ 17 ม.ค. | เดินทางถึงโตเกียว',
+                items: [
+                    'เดินทางถึงสนามบินนาริตะ (NRT)',
+                    'นั่งรถไฟ <strong>Keisei Skyliner</strong> ตรงสู่สถานี Nippori (36 นาที)',
+                    'เช็คอินเข้าที่พัก',
+                    '<strong>กิจกรรมยามค่ำ:</strong> เดินเล่นย่าน <strong>Yanaka Ginza</strong>'
+                ]
+            },
+            {
+                type: 'list',
+                title: 'Day 2: Tokyo West Side',
+                subtitle: 'วันอาทิตย์ที่ 18 ม.ค. | สำรวจฝั่งตะวันตกของโตเกียว',
+                items: [
+                    '<strong>เช้า:</strong> ศาลเจ้าเมจิ (Meiji Jingu)',
+                    '<strong>สาย:</strong> เดินเล่นถนน Takeshita ย่านฮาราจูกุ',
+                    '<strong>บ่าย/ค่ำ:</strong> ชมห้าแยกชิบูย่า และขึ้นตึก Shibuya Sky'
+                ]
+            },
+            {
+                type: 'list',
+                title: 'Day 3: Snow Fun at GALA Yuzawa!',
+                subtitle: 'วันจันทร์ที่ 19 ม.ค. | ตะลุยหิมะที่กาล่า ยูซาว่า',
+                items: [
+                    '<strong>(ใช้ JR Tokyo Wide Pass วันที่ 1)</strong>',
+                    'เดินทางด้วย <strong>Joetsu Shinkansen</strong> จากโตเกียวสู่ลานสกี',
+                    '<strong>กิจกรรม:</strong> เล่นสกี, นั่งกระเช้า Gondola, เล่นถาดเลื่อนหิมะ'
+                ]
+            },
+            {
+                type: 'list',
+                title: 'Day 4: Journey to Mt. Fuji',
+                subtitle: 'วันอังคารที่ 20 ม.ค. | สู่คาวากุจิโกะ',
+                items: [
+                    '<strong>(ใช้ JR Tokyo Wide Pass วันที่ 2)</strong>',
+                    'ฝากกระเป๋าใบใหญ่ไว้ที่โรงแรมเดิม',
+                    'เดินทางโดยรถไฟ <strong>Fuji Excursion</strong> สู่สถานี Kawaguchiko',
+                    'เช็คอินเข้าที่พัก (แนะนำที่พักวิวฟูจิ)'
+                ]
+            },
+            {
+                type: 'list',
+                title: 'Day 5: Good Morning, Fuji-san!',
+                subtitle: 'วันพุธที่ 21 ม.ค. | ชมฟูจิยามเช้าและกลับโตเกียว',
+                items: [
+                    '<strong>(ใช้ JR Tokyo Wide Pass วันที่ 3)</strong>',
+                    'ตื่นเช้าชมวิวภูเขาไฟฟูจิที่สวยที่สุด',
+                    'แวะถ่ายรูปที่ <strong>Chureito Pagoda</strong> (เจดีย์แดง 5 ชั้น)',
+                    'เดินทางกลับโตเกียวและรับกระเป๋าคืน'
+                ]
+            },
+            {
+                type: 'list',
+                title: 'Day 6: The Great Buddha of Kamakura',
+                subtitle: 'วันพฤหัสบดีที่ 22 ม.ค. | เที่ยวเมืองเก่าคามาคุระ',
+                items: [
+                    'เดินทางโดยรถไฟ JR Yokosuka Line (จ่ายแยก)',
+                    '<strong>กิจกรรม:</strong> นมัสการพระใหญ่ไดบุทสึ, ชมวิวที่วัดฮาเสะเดระ, เดินชิมของอร่อยที่ถนนโคมาจิ'
+                ]
+            },
+            {
+                type: 'list',
+                title: 'Day 7: Last Day & Departure',
+                subtitle: 'วันศุกร์ที่ 23 ม.ค. | เก็บตกและเดินทางกลับ',
+                items: [
+                    '<strong>เช้า:</strong> ซื้อของฝากที่ตลาดอะเมโยโกะ หรือเดินเล่นย่านอาซากุสะ',
+                    'เดินทางกลับมาที่ Nippori',
+                    'นั่งรถไฟ <strong>Keisei Skyliner</strong> สู่สนามบินนาริตะ (NRT)'
+                ]
+            },
+            {
+                type: 'list',
+                title: 'Trip Budget (ประมาณการ)',
+                subtitle: '~133,000 เยน / คน (ประมาณ 34,500 บาท)',
+                items: [
+                    '<strong>ที่พัก (6 คืน):</strong> 45,000 - 80,000 เยน',
+                    '<strong>JR Tokyo Wide Pass:</strong> 15,000 เยน',
+                    '<strong>ค่าเดินทางอื่นๆ:</strong> ~10,000 เยน',
+                    '<strong>ค่าเข้าชม/กิจกรรม:</strong> ~18,000 เยน',
+                    '<strong>ค่าอาหาร:</strong> ~45,000 เยน'
+                ]
+            },
+            {
+                type: 'final',
+                title: 'Thank You!',
+                subtitle: 'ขอให้เป็นการเดินทางที่น่าประทับใจ'
+            }
+        ];
+
+        let currentSlide = 0;
+        const slideDisplay = document.getElementById('slide-display');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const slideCounter = document.getElementById('slide-counter');
+
+        function renderSlide() {
+            const slideData = slides[currentSlide];
+            slideDisplay.style.opacity = 0;
+
+            setTimeout(() => {
+                slideDisplay.innerHTML = ''; // Clear previous content
+
+                if (slideData.type === 'title' || slideData.type === 'final') {
+                    const title = document.createElement('h1');
+                    title.className = 'text-4xl md:text-6xl font-bold text-[#004AAD] mb-4';
+                    title.innerHTML = slideData.title;
+
+                    const subtitle = document.createElement('h2');
+                    subtitle.className = 'text-2xl md:text-3xl text-[#0062D5]';
+                    subtitle.innerHTML = slideData.subtitle;
+                    
+                    slideDisplay.appendChild(title);
+                    slideDisplay.appendChild(subtitle);
+
+                    if(slideData.text) {
+                        const text = document.createElement('p');
+                        text.className = 'text-xl text-gray-600 mt-6';
+                        text.innerHTML = slideData.text;
+                        slideDisplay.appendChild(text);
+                    }
+                } else if (slideData.type === 'list') {
+                    const title = document.createElement('h2');
+                    title.className = 'text-3xl md:text-4xl font-bold text-[#004AAD] mb-2';
+                    title.innerHTML = slideData.title;
+                    slideDisplay.appendChild(title);
+
+                    if (slideData.subtitle) {
+                        const subtitle = document.createElement('p');
+                        subtitle.className = 'text-xl text-gray-500 mb-8';
+                        subtitle.innerHTML = slideData.subtitle;
+                        slideDisplay.appendChild(subtitle);
+                    }
+                    
+                    const list = document.createElement('ul');
+                    list.className = 'text-left text-lg md:text-xl space-y-3';
+                    slideData.items.forEach(itemText => {
+                        const listItem = document.createElement('li');
+                        listItem.className = 'text-gray-700';
+                        listItem.innerHTML = `&bull; ${itemText}`;
+                        list.appendChild(listItem);
+                    });
+                    slideDisplay.appendChild(list);
+                }
+                
+                slideDisplay.style.opacity = 1;
+                updateControls();
+            }, 300); // Match timeout with transition duration
+        }
+
+        function updateControls() {
+            slideCounter.textContent = `สไลด์ ${currentSlide + 1} / ${slides.length}`;
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === slides.length - 1;
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                renderSlide();
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                renderSlide();
+            }
+        });
+
+        // Initial render
+        renderSlide();
+    </script>
+
+</body>
+</html>
